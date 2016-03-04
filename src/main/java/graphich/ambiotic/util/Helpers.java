@@ -1,6 +1,7 @@
 package graphich.ambiotic.util;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import cpw.mods.fml.common.registry.GameData;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -41,20 +42,20 @@ public class Helpers {
             for (ItemStack is : items) {
                 Block block = Block.getBlockFromItem(is.getItem());
                 blockId = Block.getIdFromBlock(block);
-                if(!blockIds.contains(blockId))
+                if (!blockIds.contains(blockId))
                     blockIds.add(blockId);
                 List<ItemStack> subblockitems = new ArrayList<ItemStack>();
-                block.getSubBlocks(is.getItem(),null, subblockitems);
-                for(ItemStack sis : subblockitems) {
+                block.getSubBlocks(is.getItem(), null, subblockitems);
+                for (ItemStack sis : subblockitems) {
                     block = Block.getBlockFromItem(sis.getItem());
                     blockId = Block.getIdFromBlock(block);
-                    if(!blockIds.contains(blockId))
+                    if (!blockIds.contains(blockId))
                         blockIds.add(blockId);
                 }
             }
         } else if (GameData.getBlockRegistry().containsKey(specifier)) {
             blockId = GameData.getBlockRegistry().getId(specifier);
-            if(!blockIds.contains(blockId))
+            if (!blockIds.contains(blockId))
                 blockIds.add(blockId);
         }
         return blockIds;
